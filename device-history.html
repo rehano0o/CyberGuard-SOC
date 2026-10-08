@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Device History | CyberGuard SOC</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/device-history.css">
+</head>
+<body class="locked">
+<div class="app">
+<nav class="side">
+  <div class="brand">🛡 CyberGuard SOC</div>
+  <a href="dashboard.html">SOC Dashboard</a>
+  <a class="on" href="device-history.html">Device History</a>
+  <a href="alerts.html">Alerts</a>
+  <a href="incidents.html">Incidents</a>
+  <a href="attack-lab.html">Attack Lab</a>
+  <a href="about.html">About</a>
+  <div class="side-user" id="who"></div>
+  <div class="side-divider"></div>
+  <button class="logout-btn" id="logout"><span>↪</span> Logout</button>
+</nav>
+
+<main>
+  <div class="row">
+    <div>
+      <h1>Device History</h1>
+      <div class="sub">Investigate activity by source/device identifier</div>
+    </div>
+    <a class="history-back" href="dashboard.html">← Dashboard</a>
+  </div>
+
+  <div class="history-tools">
+    <input id="search" type="search" placeholder="Search source/device...">
+    <button id="refresh-history">Refresh</button>
+  </div>
+
+  <div id="device-list" class="device-list">
+    <div class="empty">Loading device history...</div>
+  </div>
+
+  <section id="detail" class="history-detail hidden">
+    <div class="row">
+      <div>
+        <h2 id="detail-title">Device</h2>
+        <div id="detail-summary" class="sub"></div>
+      </div>
+      <button id="close-detail">Close</button>
+    </div>
+
+    <div id="detail-stats" class="grid"></div>
+
+    <h2>TIMELINE</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Event</th>
+            <th>Severity</th>
+            <th>Account ID</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody id="timeline"></tbody>
+      </table>
+    </div>
+
+    <h2>BLOCK HISTORY</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Blocked</th>
+            <th>Until</th>
+            <th>Reason</th>
+            <th>Unblocked</th>
+          </tr>
+        </thead>
+        <tbody id="blocks"></tbody>
+      </table>
+    </div>
+
+    <h2>ALERTS / INCIDENTS</h2>
+    <div id="investigations"></div>
+  </section>
+</main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/device-history.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CyberGuard SOC</title><link rel="stylesheet" href="css/style.css"></head><body>
+<div class="login"><h1 style="color:var(--accent)">🛡 CyberGuard SOC</h1><div class="sub">Analyst sign-in · Security Operations Console</div>
+<div class="card"><form id="login-form" novalidate>
+<label for="email">Analyst email</label><input id="email" type="email" placeholder="soc@cyberguard.test" autocomplete="username">
+<label for="password">Password</label><input id="password" type="password" autocomplete="current-password">
+<p style="margin-top:16px"><button class="btn big" id="login-btn" type="submit">SIGN IN</button></p></form><div id="msg" class="msg"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script><script src="js/auth.js"></script></body></html>

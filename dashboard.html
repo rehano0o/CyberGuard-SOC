@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard | CyberGuard SOC</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.stat.clickable {
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.stat.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0,0,0,.12);
+}
+
+.stat.clickable:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.activity-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+.activity-filter label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Event filter dropdown */
+.activity-filter select {
+  padding: 8px 12px;
+  min-width: 180px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #1b1f24;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Dropdown options */
+.activity-filter select option {
+  background-color: #1b1f24;
+  color: #ffffff;
+}
+
+/* Selected option */
+.activity-filter select option:checked {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+.activity-tools {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.activity-tools button {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+</style>
+
+</head>
+
+<body class="locked">
+
+<div class="app">
+
+<nav class="side">
+
+<div class="brand">🛡 CyberGuard SOC</div>
+
+<a class="on" href="dashboard.html">SOC Dashboard</a>
+<a href="device-history.html">Device History</a>
+<a href="alerts.html">Alerts</a>
+<a href="incidents.html">Incidents</a>
+<a href="attack-lab.html">Attack Lab</a>
+<a href="about.html">About</a>
+
+<div class="side-user" id="who"></div>
+
+<div class="side-divider"></div>
+
+<button class="logout-btn" id="logout">
+<span>↪</span> Logout
+</button>
+
+</nav>
+
+<main>
+
+<div class="row">
+
+<div>
+<h1>CyberGuard SOC</h1>
+<div class="sub">Security Operations Console</div>
+</div>
+
+<div class="status off" id="status">
+● CONNECTING...
+</div>
+
+</div>
+
+
+<!-- DASHBOARD STAT CARDS -->
+
+<div class="grid">
+
+<div
+  class="card stat clickable"
+  id="total-card"
+  role="button"
+  tabindex="0"
+  title="View all security events"
+>
+<b id="s-total">0</b>
+<span>Total events</span>
+</div>
+
+
+<div
+  class="card stat clickable"
+  id="failed-card"
+  role="button"
+  tabindex="0"
+  title="View failed logins"
+>
+<b id="s-failed">0</b>
+<span>Failed logins</span>
+</div>
+
+
+<div
+  class="card stat warn clickable"
+  id="alerts-card"
+  role="button"
+  tabindex="0"
+  title="Open alerts"
+>
+<b id="s-alerts">0</b>
+<span>Active alerts</span>
+</div>
+
+
+<div
+  class="card stat warn clickable"
+  id="incidents-card"
+  role="button"
+  tabindex="0"
+  title="Open incidents"
+>
+<b id="s-inc">0</b>
+<span>Open incidents</span>
+</div>
+
+</div>
+
+
+<!-- ACTIVE ALERTS -->
+
+<h2>ACTIVE ALERTS</h2>
+
+<div id="alerts"></div>
+
+
+<!-- RECENT SECURITY EVENTS -->
+
+<h2 id="recent-activity">
+RECENT SECURITY EVENTS
+</h2>
+
+
+<!-- EVENT TYPE FILTER -->
+
+<div class="activity-filter">
+
+<label for="event-type-filter">
+Event Type:
+</label>
+
+<select id="event-type-filter">
+
+<option value="ALL">
+All Events
+</option>
+
+<option value="LOGIN_SUCCESS">
+LOGIN_SUCCESS
+</option>
+
+<option value="FAILED_LOGIN">
+FAILED_LOGIN
+</option>
+
+<option value="BLOCKED_LOGIN">
+BLOCKED_LOGIN
+</option>
+
+<option value="LOGOUT">
+LOGOUT
+</option>
+
+</select>
+
+</div>
+
+
+<!-- CURRENT FILTER MESSAGE -->
+
+<div
+  id="activity-filter"
+  class="activity-filter hidden"
+></div>
+
+
+<!-- EVENTS TABLE -->
+
+<div class="tw">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Event</th>
+<th>Severity</th>
+<th>Target</th>
+<th>Source</th>
+<th>Time</th>
+</tr>
+
+</thead>
+
+<tbody id="events">
+
+<tr>
+<td colspan="5" class="empty">
+Loading...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- SHOW MORE -->
+
+<div class="activity-tools">
+
+<button
+  id="show-more-events"
+  type="button"
+>
+Show More
+</button>
+
+</div>
+
+</main>
+
+</div>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/auth.js"></script>
+
+<script src="js/detection.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Attack Lab | CyberGuard SOC</title><link rel="stylesheet" href="css/style.css"></head>
+<body class="locked"><div class="app"><nav class="side">
+<div class="brand">🛡 CyberGuard SOC</div>
+<a class="" href="dashboard.html">SOC Dashboard</a>
+<a class="" href="alerts.html">Alerts</a>
+<a class="" href="incidents.html">Incidents</a>
+<a class="on" href="attack-lab.html">Attack Lab</a>
+<a class="" href="about.html">About</a>
+<div class="side-user" id="who"></div>
+<div class="side-divider"></div>
+<button class="logout-btn" id="logout"><span>↪</span> Logout</button>
+</nav><main>
+<h1>Attack Lab</h1><div class="sub">This laboratory generates controlled security activity against the CyberGuard Test Server for defensive testing.</div>
+<div class="card"><h2 style="margin-top:0">BRUTE FORCE TEST</h2>
+<label for="target-email">Test Server login email</label><input id="target-email" type="email" placeholder="student@cyberguard.test">
+<p class="sub" style="margin-top:10px">Makes 5 real login attempts with random wrong passwords, one per second. Fixed target: this project's own authentication only.</p>
+<button class="btn big" id="start">START BRUTE FORCE TEST</button><div id="msg" class="msg"></div><div class="log" id="log"></div></div>
+<div class="note"><b>Limitation:</b> a browser cannot drive the Test Server's login page from another origin (same-origin policy), and this lab does not work around that. Instead it sends real login requests to the same Supabase Auth service and then calls the same <code>log_failed_login()</code> function the Test Server uses, but only after Auth rejects the attempt. Events are labelled source <code>ATTACK_LAB</code>.<br><br><b>Manual procedure (always works):</b> 1. Open the Test Server. 2. Enter a wrong password 5 times. 3. Return here to the SOC Dashboard. 4. Watch the real events arrive.</div>
+</main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script><script src="js/auth.js"></script>
+<script src="js/attack-lab.js"></script></body></html>
